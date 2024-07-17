@@ -47,16 +47,17 @@ function Card() {
       {data.map((element, index) => {
         const carouselId = `carouselExampleDark${element.id}`;
         return (
-          <div key={index} className="card mb-3">
+          <div key={index} className="card"
+            style={{ marginBottom: index === (data.length - 1) ? 200 : 20 }}>
             <div className="row g-0">
               <div className="col-md-4">
                 {/* carousel images */}
                 <div id={carouselId} className="carousel carousel-dark slide m-2" data-bs-ride="carousel">
                   <div className="carousel-inner">
-                  {element.images.map((ele, i) => (
+                    {element.images.map((ele, i) => (
                       <div key={i} className={`carousel-item ${i === 0 ? "active" : ""}`}>
                         <img src={ele} className="d-block w-100" alt={`Slide ${i + 1}`}
-                          style={{ height: "400px", objectFit: "contain" }}/>
+                          style={{ height: "400px", objectFit: "contain" }} />
                       </div>
                     ))}
                   </div>
@@ -76,12 +77,12 @@ function Card() {
                 <div className="card-body">
                   <h1 className="card-title">{element.title}</h1>
                   <h6 className="card-subtitle mb-2 text-muted fw-bold">Details & Core</h6>
-                  <p className="card-text fw-bold" style={{color:"darkgray"}}>{element.description}</p>
+                  <p className="card-text fw-bold" style={{ color: "darkgray" }}>{element.description}</p>
                 </div>
               </div>
               {/* Price & Quantity */}
               <div className="col-md-2 d-flex flex-column align-items-center m-4">
-                <h4>${element.price.toFixed(2)}</h4>
+                <h4>${element.price * (element.quantity || 1)}</h4>
                 <div className="d-flex align-items-center gap-2 m-4">
                   <button className="btn btn-outline-secondary" onClick={() => handleDec(element.id, element.quantity || 1)}>-</button>
                   <p className="mb-0">{element.quantity || 1}</p>
